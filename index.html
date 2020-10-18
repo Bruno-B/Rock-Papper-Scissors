@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const playable = ["Rock","Papper","Scissors"];
+
+        
+
+        let playerCount = 0;
+        let computerCount = 0;
+
+        function computerPlay(){
+            return playable[Math.floor(Math.random()* 3)]
+        }
+
+        function playRound(){
+            
+            const playerSelection = prompt("Rock,Papper,Scissors?");
+            const computerSelection = computerPlay();
+
+            let indexP = playable.indexOf(capitalize(playerSelection));
+            let indexC = playable.indexOf(capitalize(computerSelection));
+
+            if(indexP == indexC){
+                return `You Draw.`;
+            }
+
+            if(indexP == 0 && indexC == 2 || indexC == 0 && indexP == 2){
+                let winner = "Win";
+                if(indexC == 0) {
+                    winner = "Lose";
+                    computerCount++;
+                }else playerCount++;
+                return `You ${winner}. Rock beats Scissors!`;
+            }
+            else if(indexC>indexP) {
+                computerCount++;
+                return `You lose ${playable[indexC]} beats ${playable[indexP]}!`;
+            }
+
+            else{
+                playerCount++;
+                return `You win ${playable[indexP]} beats ${playable[indexC]}`;
+            }
+
+
+        }
+
+        function capitalize(a){
+            let lower = a.toLowerCase();
+            return a.charAt(0).toUpperCase() + lower.slice(1);
+        }
+
+        function game(){
+            for(let i = 1;i<=5;i++){
+                console.log(playRound());
+                console.log(playerCount +" " + computerCount);
+            }
+        }
+
+    </script>
+</body>
+</html>
